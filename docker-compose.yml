@@ -1,25 +1,24 @@
 version:'3'
 services:
-
-        nginx:
-          container_name: nginx
-          build: ./nginx
-          image: docker-django/nginx
-          restart: always
-          ports:
-            - "80:80"
-          volumes:
-            - ./fastcampus_test:/srv/docker-django
-            - ./log:/var/log/nginx
-          depens_on:
-            - django
+	nginx:
+		container_name: nginx
+		build: ./nginx
+		image: docker-django/nginx
+		restart: always
+		ports:
+			- "80:80"
+		volumes:
+			- ./fastcampus_test:/srv/docker-django
+			- ./log:/var/log/nginx
+		depens_on:
+			- django
 
         django:
-          container_name: django
-          build: ./fastcampus_test
-          image: docker-django/django
-          restart: always
-          command: uwsgi --ini uwsgi.ini
-          volumes:
-              - ./fastcampus_test:/srv/docker-django
-              - ./log:/var/log/uwsgi
+		container_name: django
+		build: ./fastcampus_test
+		image: docker-django/django
+		restart: always
+		command: uwsgi --ini uwsgi.ini
+		volumes:
+			- ./fastcampus_test:/srv/docker-django
+			- ./log:/var/log/uwsgi
